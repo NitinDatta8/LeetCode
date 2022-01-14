@@ -8,10 +8,8 @@ class Solution:
     def height(self,root):
         if root is None: return 0 
         left_height = self.height(root.left)
-        if left_height == -1: return -1
         right_height = self.height(root.right)
-        if right_height == -1: return -1
-        if abs(left_height-right_height)>1:
+        if abs(left_height-right_height)>1 or left_height ==-1 or right_height ==-1:
             return -1
         return max(left_height,right_height)+1
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
