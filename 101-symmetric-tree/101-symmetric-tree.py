@@ -6,17 +6,12 @@
 #         self.right = right
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        if root is None: return True 
-        stack  = [(root.left,root.right)]
-        while stack:
-            left,right = stack.pop()
-            if left is None and right is None: 
-                continue
+        def helper(left,right):
             if left is None or right is None: 
+                return left==right
+            if left.val != right.val:
                 return False
-            if left.val == right.val:
-                stack.append((left.left,right.right))
-                stack.append((left.right,right.left))
-            else:
-                return False
-        return True
+            return helper(left.left,right.right) and helper(left.right,right.left)
+        
+        if root is None: return True
+        return helper(root.left,root.right)
