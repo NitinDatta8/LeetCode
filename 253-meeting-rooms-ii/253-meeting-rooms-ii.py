@@ -7,16 +7,20 @@ class Solution:
         
         starts.sort()
         ends.sort()
-        available,num_rooms = 0,0 
-        s,e = 0,0
+        print(starts)
+        print(ends)
+        e,s = 0,0
+        available = 0
+        numrooms = 0
         while s<len(starts):
             if starts[s]<ends[e]:
                 if available == 0: 
-                    num_rooms += 1
+                    numrooms += 1
                 else: 
                     available -= 1
                 s += 1
             else: 
                 available += 1
                 e += 1
-        return num_rooms
+        return numrooms
+            
