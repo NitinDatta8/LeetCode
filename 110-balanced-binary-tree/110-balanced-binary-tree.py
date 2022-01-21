@@ -7,11 +7,11 @@
 class Solution:
     def height(self,root):
         if root is None: return 0 
-        left_height = self.height(root.left)
-        right_height = self.height(root.right)
-        if abs(left_height-right_height)>1 or left_height ==-1 or right_height ==-1:
+        left = self.height(root.left)
+        right = self.height(root.right)
+        if abs(left-right)>1 or left == -1 or right == -1: 
             return -1
-        return max(left_height,right_height)+1
+        return 1 + max(left,right)
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
         return self.height(root)!=-1
         
