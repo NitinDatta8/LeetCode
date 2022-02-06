@@ -5,7 +5,17 @@ class Solution(object):
         :type k: int
         :rtype: None Do not return anything, modify nums in-place instead.
         """
-        k %= len(nums) 
-        k = len(nums) -k 
-        nums[:]  = nums[k:] + nums[:k]
+        if k == 0: 
+            return nums 
+        def reverse(start,end):
+            while start<end:
+                nums[start], nums[end] = nums[end], nums[start]
+                start += 1
+                end -= 1
+        
+        k %= len(nums)
+        end = len(nums)-1
+        reverse(0,end-k)
+        reverse(end-k+1, end)
+        reverse(0,end)
         return nums
