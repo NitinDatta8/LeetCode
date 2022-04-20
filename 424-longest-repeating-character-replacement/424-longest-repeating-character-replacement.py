@@ -3,9 +3,11 @@ class Solution:
         freq = {}
         res = 0 
         l = 0 
+        maxf = 0 
         for r in range(len(s)):
             freq[s[r]]  = 1 + freq.get(s[r],0)
-            while (r-l+1)  - max(freq.values()) > k:
+            maxf = max(maxf, freq[s[r]])
+            while (r-l+1)  - maxf > k:
                 freq[s[l]] -= 1
                 l += 1
                 
