@@ -1,19 +1,24 @@
 class Solution:
     def totalFruit(self, fruits: List[int]) -> int:
-        basket,maxcount= 3,float('-inf')
-        i,j=0,0
+        # hashmap of 2 elements only 
+        # maintain left and right pointer 
+        # remove elements from left when len(hashmap)>2
+        # hasmap[1]: count
+        # maxlen = max(r - l + 1, maxlen)
+        
         freq = {}
-        while i<len(fruits):
-            if fruits[i]  not in freq: 
-                basket -= 1
-                if basket == 0: 
-                    maxcount = max(maxcount,sum(freq.values()))
-                    freq = {}
-                    basket = 2
-                    j += 1
-                    i = j
-                freq[fruits[i]] = 1
+        l = 0 
+        maxlen = 0 
+        for r in range(len(fruits)): 
+            if fruits[r] not in freq: 
+                freq[fruits[r]] = 1
             else: 
-                freq[fruits[i]] += 1
-            i += 1
-        return max(maxcount,sum(freq.values()))
+                freq[fruits[r]] += 1
+                
+            while len(freq) > 2: 
+                maxlen = max(maxlen, r - l)
+                freq[fruits[l]] -= 1
+                if freq[fruits[l]] == 0:
+                    del freq[fruits[l]]
+                l += 1
+        return max(maxlen, r - l + 1)
