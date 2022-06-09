@@ -1,38 +1,34 @@
-
-#  [4, 2, 0, 3, 2, 5]
-#1 [0, 4, 4, 4, 4, 4]
-#2 [5, 5, 5, 5, 5, 0]
-#3 [0, 4, 4, 4, 4, 0]
-#4 [0, 2, 4, 1, 2, 0]
-# sum of list of step 4 = 9 
+# 4 2 0 3 2 5 
+# 0 4 4 4 4 4 max_left 
+# 5 5 5 5 5 0 max_right
+# 0 4 4 4 4 0 x = min(max_left, max_right)
+# 0 2 4 1 2 0 x - height[i]
 class Solution:
-    def trap(self, height: List[int]) -> int:
-        max_left = [0] * len(height)
-        max_right = [0] * len(height)
-        min_lr = []
-        res = []
+    def trap(self, nums: List[int]) -> int:
+        # step 1 
+        max_left = [0] * len(nums)
+        maxl = 0 
+        for i in range(1,len(nums)):
+            maxl = max(maxl,nums[i-1])
+            max_left[i] = maxl
         
-        max_l = -1 
-        max_r = -1 
-        # Step 1
-        for i in range(1,len(height)):
-            max_l = max(max_l, height[i-1])
-            max_left[i] = max_l 
-        # Step 2
-        for i in range(len(height)-2, -1, -1):
-            max_r = max(max_r, height[i+1])
-            max_right[i] = max_r
+        # step 2
+        max_right = [0] * len(nums)
+        maxr = 0 
+        for i in range(len(nums)-2, -1, -1 ):
+            maxr = max(maxr,nums[i+1] )
+            max_right[i] = maxr
         
-        # Step 3
+        # step 3
+        min_both = []
         for i,j in zip(max_left, max_right):
-            min_lr.append(min(i,j))
+            min_both.append(min(i,j))
         
-        # Step 4
-        for i,j in zip(min_lr,height):
+        res = []
+        for i,j in zip(min_both,nums):
             val = i - j 
             if val < 0: 
-                val = 0 
-            res.append(val)
+                res.append(0)
+            else: 
+                res.append(val)
         return sum(res)
-        
-            
