@@ -1,28 +1,27 @@
-# put them seperate and sort them 
-# s = e= 0 
-# compare start and end 
-# [0   5 15]
-# [10 20 30]
+
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        starts, ends = [], []
-        for i in intervals: 
-            starts.append(i[0])
-            ends.append(i[1])
-            
-        starts.sort()
-        ends.sort()
+        left = []
+        right = []
+        for i in intervals:
+            left.append(i[0])
+            right.append(i[1])
+        left.sort()
+        right.sort()
+
+        l = 0
+        r = 0
+        roomsMax = 0 
+        rooms = 0
+        while l < len(left):
+            if left[l] < right[r]:
+                rooms += 1
+                l += 1
+            else:
+                rooms -= 1
+                r += 1
+            roomsMax = max(roomsMax, rooms)
         
-        s, e = 0, 0 
-        req = 0 
-        maxreq = 0
-        while s < len(starts):
-            if starts[s] < ends[e]:
-                req += 1 
-                s += 1
-            else: 
-                req -= 1
-                e += 1
-            maxreq = max(req, maxreq)
-        return maxreq
+        return roomsMax
+
             
