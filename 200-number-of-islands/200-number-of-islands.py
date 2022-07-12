@@ -1,32 +1,23 @@
 '''
-count = 0 
-2 for loops to check the grid
-if grid[r][c] == '1':
-    dfs(r,c)
-    count += 1
+maintain a count 
+Use DFS if current cell has 1 
+    in DFS mark all the connected 1s to 0 (visited) so that they arent counted again
+    move all 4 directions recursively 
+increment count once a full island is visited 
+return the count 
 
-return count
-
-dfs(r,c):
-check for boundary conditions and grid[r][c] !='0' return 
-grid[r][c] = '0'
-
-dfs(r+1, c)
-dfs(r-1, c)
-dfs(r, c+1)
-dfs(r, c-1)
-return
-
-Time - O(m*n)
-Space - O(1)
+Questions to ask: 
+1. Will my input cells contain only 0/1? 
+2. grid constraints whats the min/max size of rows or columns? 
 '''
 
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         count = 0 
+        ROWS, COLS = len(grid), len(grid[0])
         
         def dfs(r,c):
-            if r < 0 or c < 0 or r == len(grid) or c == len(grid[0]) or grid[r][c] == '0':
+            if r < 0 or c < 0 or r == ROWS or c == COLS or grid[r][c] == '0':
                 return 
             
             grid[r][c] = '0'
@@ -34,12 +25,12 @@ class Solution:
             dfs(r-1, c)
             dfs(r, c+1)
             dfs(r, c-1)
-            return 
             
         
-        for r in range(len(grid)):
-            for c in range(len(grid[0])):
+        for r in range(ROWS):
+            for c in range(COLS):
                 if grid[r][c] == '1':
                     dfs(r,c)
                     count += 1
+        
         return count
