@@ -1,12 +1,15 @@
+'''
+Time : O(n n!)
+Space: O(n!)
+'''
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         res = []
         
-        # Base case
         if len(nums) == 1: 
             return [nums[:]]
         
-        for i in range(len(nums)): 
+        for i in range(len(nums)):
             n = nums.pop(0)
             perms = self.permute(nums)
             
@@ -15,5 +18,4 @@ class Solution:
             
             res.extend(perms)
             nums.append(n)
-        
         return res
