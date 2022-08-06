@@ -16,10 +16,10 @@ class Solution:
             backtrack(i + 1, subset)
             
             subset.pop()
-            while i + 1 < len(nums) and nums[i + 1] == nums[i]: 
+            while i + 1 < len(nums) and nums[i] == nums[i + 1]:
                 i += 1
-                
+            
             backtrack(i + 1, subset)
-        
+            
         backtrack(0, [])
         return res
