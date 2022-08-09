@@ -9,25 +9,24 @@ class Solution:
         group_prev = dummy 
         
         while True: 
-            kth = self.getkth(group_prev,  k)
+            kth = self.get_kth(group_prev, k)
             if not kth: 
                 break 
-            group_next = kth.next 
+            group_next = kth.next
             
-            # reverse the group 
             prev, cur = kth.next, group_prev.next
-            while cur != group_next:
-                tmp = cur.next 
-                cur.next = prev
+            while cur != group_next: 
+                nxt = cur.next 
+                cur.next = prev 
                 prev = cur 
-                cur = tmp 
-            
+                cur = nxt
             tmp = group_prev.next 
             group_prev.next = kth
             group_prev = tmp 
+            
         return dummy.next
-        
-    def getkth(self, cur, k): 
+    
+    def get_kth(self, cur, k): 
         while cur and k > 0: 
             cur = cur.next 
             k -= 1
