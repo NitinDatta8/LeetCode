@@ -12,13 +12,12 @@ class Solution:
             '9': 'wxyz'
         }
         
-        def backtrack(i, curstr): 
-            if len(curstr) == len(digits): 
-                res.append(curstr)
+        def backtrack(i, cur_str): 
+            if len(digits) == len(cur_str): 
+                res.append(cur_str)
                 return 
-            
-            for c in digit_to_char[digits[i]]: 
-                backtrack(i + 1, curstr + c)
+            for c in digit_to_char[digits[i]]:
+                backtrack(i + 1, cur_str + c)
         
         if digits: 
             backtrack(0, '')
