@@ -6,22 +6,25 @@ class Node:
         self.next = next
         self.random = random
 """
-
+'''
+in first pass add all the nodes to new_hashmap 
+in second pass make connections in the new_hashmap 
+return new_hashmap[head]
+'''
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
-        old_to_copy = {None:None}
+        old_new = {None:None}
         
-        cur = head 
+        cur = head
         while cur: 
             copy = Node(cur.val)
-            old_to_copy[cur] = copy
-            cur = cur.next
+            old_new[cur] = copy 
+            cur = cur.next 
         
         cur = head 
         while cur: 
-            copy = old_to_copy[cur]
-            copy.next = old_to_copy[cur.next]
-            copy.random = old_to_copy[cur.random]
+            copy = old_new[cur]
+            copy.next = old_new[cur.next]
+            copy.random = old_new[cur.random]
             cur = cur.next
-        
-        return old_to_copy[head]
+        return old_new[head]
