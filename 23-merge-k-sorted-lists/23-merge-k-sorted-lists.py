@@ -14,16 +14,11 @@ class Solution:
         if not lists or len(lists) == 0: 
             return None
         
-        while len(lists) > 1:
-            merged_lists = []
-            
-            for i in range(0, len(lists), 2): 
-                l1 = lists[i]
-                l2 = lists[i + 1] if i + 1 < len(lists) else None
-                merged_lists.append(self.merge_two_lists(l1, l2))
-            lists = merged_lists
-        return lists[0]
-    
+        final_list = lists[0]
+        for i in range(1, len(lists)): 
+            final_list = self.merge_two_lists(final_list,lists[i])
+        
+        return final_list
     def merge_two_lists(self, list1, list2):
         dummy = cur = ListNode(0)
         while list1 and list2: 
