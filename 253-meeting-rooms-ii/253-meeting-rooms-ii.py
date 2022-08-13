@@ -1,27 +1,27 @@
+'''
+0  5  15
+10 20 30
+res = 2 
 
+'''
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        left = []
-        right = []
-        for i in intervals:
-            left.append(i[0])
-            right.append(i[1])
-        left.sort()
-        right.sort()
-
-        l = 0
-        r = 0
-        roomsMax = 0 
-        rooms = 0
-        while l < len(left):
-            if left[l] < right[r]:
-                rooms += 1
-                l += 1
-            else:
-                rooms -= 1
-                r += 1
-            roomsMax = max(roomsMax, rooms)
+        starts, ends = [], []
+        for s, e in intervals: 
+            starts.append(s)
+            ends.append(e)
         
-        return roomsMax
-
-            
+        starts.sort()
+        ends.sort()
+        occupied = 0 
+        max_occupied = 0 
+        s, e = 0, 0
+        while s < len(starts): 
+            if starts[s] < ends[e]:
+                occupied += 1
+                max_occupied = max(occupied, max_occupied)
+                s += 1
+            else: 
+                occupied -= 1
+                e += 1
+        return max_occupied
