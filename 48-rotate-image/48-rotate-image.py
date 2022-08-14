@@ -3,24 +3,26 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        l, r = 0, len(matrix) - 1 
-        while l < r: 
-            top, bottom = l, r 
-            for i in range(r - l): 
-                
-                topleft = matrix[top][l + i]
-                
+        left, right = 0, len(matrix) - 1
+        
+        while left < right: 
+            top, bottom = left, right
+            for i in range(right - left): 
+
+                # store top left in variable 
+                topLeft = matrix[top][left + i]
+
                 # move bottom left to top left 
-                matrix[top][l + i] = matrix[bottom - i][l]
-                
-                # move bottom right to bottom left
-                matrix[bottom - i][l] = matrix[bottom][r - i]
-                
-                # move top right to bottom right 
-                matrix[bottom][r - i] = matrix[top + i][r]
-                
-                # move top left to top right 
-                matrix[top + i][r] = topleft
-            l += 1 
-            r -= 1
-                
+                matrix[top][left + i] = matrix[bottom - i][left]
+
+                # move bottom right to bottom left 
+                matrix[bottom - i][left] = matrix[bottom][right - i]
+
+                # move top right to bottom right: 
+                matrix[bottom][right - i] = matrix[top + i][right]
+
+                # move top left to top right
+                matrix[top + i][right] = topLeft
+
+            left += 1
+            right -= 1
