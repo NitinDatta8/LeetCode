@@ -1,38 +1,33 @@
 '''
-res = []
-part = []
+maintain result that is a list 
+do backtracking
 backtrack(i): 
-    base case - i >= len(s): 
-    res.append(part[:])
-    return 
+    base condition - if i >= len(s): append(copy) to res and return 
     
-    for j in range(i+1, len(s)):
-        if self.ispali(s,i, j):
-            part.append(s[i:j+1])
-            backtrack(j + 1)
-            part.pop()
-    
-    backtrack(0)
-    return res
-    
-pali(s, l, r): 
+    iterate from i to len(s) with j
+    if ispali(s, l, r): 
+        copy.append(s[i:j + 1])
+        backtrack(j + 1)
+        copy.pop()
+
+backtrack(0)
+return res
 '''
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         res = []
-        part = []
+        copy = []
         
         def backtrack(i): 
-            # Base case 
             if i >= len(s): 
-                res.append(part[:])
-                return 
+                res.append(copy[:])
+                return res
             
             for j in range(i, len(s)): 
-                if self.ispali(s, i, j): 
-                    part.append(s[i:j + 1])
+                if self.ispali(s, i, j):
+                    copy.append(s[i:j + 1])
                     backtrack(j + 1)
-                    part.pop()
+                    copy.pop()
         
         backtrack(0)
         return res
@@ -44,3 +39,4 @@ class Solution:
             l += 1
             r -= 1
         return True
+        
