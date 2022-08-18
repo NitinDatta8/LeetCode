@@ -1,40 +1,43 @@
 '''
-max_area to maintain maximum area 
+iterate over every cell in the grid 
+if cell is 1 then we do a DFS
+DFS - traverse all 4 directions and find area recursively 
+max_area = max(max_area, area)
 
-iterate over grid using 2 for loops 
-if a cell is found to be 1 perform dfs()
-
-in dfs() 
-    check boundary conditions and also check if current cell is not water and return 0
-    set the  current cell as visited by changing its value to 0 
-    size = 1
-    call dfs recursively and add it to size
-    return size
-
-update max_area by checking max between max_area and size 
 return max_area
+visited = set()
+DFS(): 
+    boundary condtions + if cell is not water + cell should not be visited 
+    mark cell as visited 
 
-Time: O(mn)
-Space: O(1)
+    area is incremented and do dfs in all 4 directions
+TIME - O(nm)
+SPACE - O(1)
 '''
 
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        max_area = 0 
         ROWS, COLS = len(grid), len(grid[0])
+        max_area = 0 
         
-        def dfs(r,c):
-            if r < 0 or c < 0 or r == ROWS or c == COLS or grid[r][c] == 0: 
+        def dfs(r, c):
+            # boundary and other edge conditions
+            if r < 0 or c < 0 or r >= ROWS or c >= COLS or grid[r][c] == 0: 
                 return 0 
             
             grid[r][c] = 0 
-            return 1 + dfs(r+1,c) + dfs(r-1,c) + dfs(r,c+1) + dfs(r,c-1)
+            
+            area = 1 
+            area += dfs(r + 1, c)
+            area += dfs(r - 1, c)
+            area += dfs(r, c + 1)
+            area += dfs(r, c - 1)
+            return area
         
-        for r in range(ROWS):
-            for c in range(COLS):
-                if grid[r][c] == 1:
-        
-                    size = dfs(r,c)
-                    max_area = max(max_area, size)
-        
+        for r in range(ROWS): 
+            for c in range(COLS): 
+                if grid[r][c] == 1: 
+                    area = dfs(r, c)
+                    max_area = max(max_area, area) 
+                    
         return max_area
