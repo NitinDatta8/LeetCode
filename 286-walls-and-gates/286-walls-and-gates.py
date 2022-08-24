@@ -21,8 +21,7 @@ class Solution:
         
         dist = 1
         while len(q) > 0: 
-            length = len(q)
-            for i in range(length):
+            for i in range(len(q)):
                 r, c = q.popleft()
                 
                 directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]
