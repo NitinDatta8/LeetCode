@@ -13,13 +13,11 @@ class Solution:
         Do not return anything, modify rooms in-place instead.
         """
         q = deque()
-        visited = set()
         ROWS, COLS = len(rooms), len(rooms[0])
         for r in range(ROWS): 
             for c in range(COLS): 
                 if rooms[r][c] == 0: 
                     q.append([r,c])
-                    visited.add((r,c))
         
         dist = 1
         while len(q) > 0: 
@@ -31,11 +29,10 @@ class Solution:
                 for dr, dc in directions: 
                     row, col = r + dr, c + dc
         
-                    if row < 0 or col < 0 or row >= ROWS or col >= COLS or rooms[row][col] == -1 or (row,col) in visited: 
+                    if row < 0 or col < 0 or row >= ROWS or col >= COLS or rooms[row][col] == -1 or rooms[row][col]!= 2147483647: 
                         continue
                     
                     rooms[row][col] = dist 
-                    visited.add((row, col))
                     q.append([row, col])
             dist += 1
 
