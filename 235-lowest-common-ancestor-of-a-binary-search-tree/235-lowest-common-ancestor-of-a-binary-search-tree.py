@@ -12,7 +12,6 @@ class Solution:
             if p.val > cur.val and q.val > cur.val: 
                 cur = cur.right
             elif p.val < cur.val and q.val < cur.val: 
-                cur = cur.left
+                cur = cur.left 
             else: 
-                return cur
-            
+                return cur 
