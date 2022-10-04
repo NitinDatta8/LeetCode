@@ -1,16 +1,8 @@
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
-        res = []
-        i, j = 0, 0 
-        while i < len(s) and j < len(t): 
-            if s[i] == t[j]:
-                res.append(t[j])
+        i = 0
+        for c in t:
+            if i == len(s): return True  # If match full s -> then s is a subsequence
+            if s[i] == c:
                 i += 1
-                j += 1
-            else: 
-                j += 1 
-        print(res)
-        if res == list(s): 
-            return True 
-        else: 
-            return False
+        return i == len(s)
