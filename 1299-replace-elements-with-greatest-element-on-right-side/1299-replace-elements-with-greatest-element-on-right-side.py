@@ -5,16 +5,11 @@ iterate backwards from second last element
 '''
 class Solution:
     def replaceElements(self, arr: List[int]) -> List[int]:
-        cur_max = arr[-1]
-        res = []
-        for i in range(len(arr)-1, -1, -1): 
-            if arr[i] > cur_max: 
-                cur_max = arr[i]
-            
-            res.append(cur_max)
+        right_max = -1 
         
-        res.pop()
-        res = res[::-1]
-        res.append(-1)
-        return res
+        for i in range(len(arr)-1, -1, -1): 
+            new_max = max(right_max, arr[i])
+            arr[i] = right_max 
+            right_max = new_max 
+        return arr
         
