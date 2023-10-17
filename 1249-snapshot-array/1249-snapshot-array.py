@@ -1,34 +1,34 @@
 class SnapshotArray:
 
     def __init__(self, length: int):
-      
-        self.ids = defaultdict(list)
-        self.snap_index = 0
+        self.s_id = 0 
+        self.freq = defaultdict(list)
 
     def set(self, index: int, val: int) -> None:
-        if self.ids[index] and self.ids[index][-1][0] == self.snap_index: 
-            self.ids[index][-1][1] = val 
+        if self.freq[index] and self.freq[index][-1][1] == self.s_id: 
+            self.freq[index][-1][0] = val 
             return 
-        self.ids[index].append([self.snap_index, val])
+        self.freq[index].append([val, self.s_id])
+
 
     def snap(self) -> int:
-        self.snap_index += 1
-        return self.snap_index - 1 
+        self.s_id += 1
+        return self.s_id - 1
 
     def get(self, index: int, snap_id: int) -> int:
-        arr = self.ids[index]  
+        arr = self.freq[index]
         s, e = 0, len(arr) - 1
         ans = -1
         while s <= e: 
             mid = (s + e) // 2
-            if arr[mid][0] <= snap_id: 
-                ans = mid
+            if arr[mid][1] <= snap_id: 
+                ans = arr[mid][0]
                 s = mid + 1
             else: 
                 e = mid - 1
         if ans == -1: 
             return 0 
-        return arr[ans][1]
+        return ans
 
 
 # Your SnapshotArray object will be instantiated and called as such:
