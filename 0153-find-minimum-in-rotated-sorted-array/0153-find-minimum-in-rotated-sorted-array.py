@@ -11,4 +11,3 @@ class Solution:
             elif nums[s] > nums[m]: 
                 e = m
             print(s, e, m)
-        return 0
