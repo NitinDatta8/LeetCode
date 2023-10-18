@@ -7,17 +7,17 @@
 
 class Solution:
     def search(self, reader: 'ArrayReader', target: int) -> int:
-        s= 0 
-        e = 2**31 - 1
-        ans = -1
-        while s <= e: 
-            m = (s + e) // 2  
-            # print(s, e, m, reader.get(m))
-            if reader.get(m) == target: 
-                return m 
-            elif reader.get(m) > target: 
+        s = 0
+        e = abs(reader.get(0))*abs(target)+1
+        while s<=e:
+            m = (s+e)//2
+            val = reader.get(m)
+            print(s,m,e,val)
+            if val == target:
+                return m
+            elif val > target:
                 e = m - 1
-            else: 
+            else:
                 s = m + 1
-    
         return -1
+        
